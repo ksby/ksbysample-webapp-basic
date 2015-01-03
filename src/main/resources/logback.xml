@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <if condition='"${spring.profiles.active}" == "develop"'>
+        <then>
+            <include resource="logback-develop.xml"/>
+        </then>
+    </if>
+    <if condition='"${spring.profiles.active}" == "product"'>
+        <then>
+            <include resource="logback-product.xml"/>
+        </then>
+    </if>
+</configuration>
