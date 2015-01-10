@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>Countryデータ登録画面(確認)</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <style>
+        <!--
+        body {
+            padding-top: 50px;
+        }
+        .navbar-brand {
+            font-size: 24px;
+        }
+        .form-group {
+            margin-bottom: 5px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        -->
+    </style>
+</head>
+
+<body>
+    <nav class="navvar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">ナビゲーションボタン</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand">WebApp - Basic</div>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav  navbar-left">
+                    <li><a href="#"><span class="glyphicon glyphicon-search"></span>　検索/一覧</a></li>
+                    <li class="active"><a href="#"><span class="glyphicon glyphicon-pencil"></span>　登録</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>　ログアウト</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-push-2 col-sm-10"><h1>Countryデータ登録</h1></div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <form method="post" action="#" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="Code" class="control-label col-sm-2">Code</label>
+                        <div class="col-sm-2">
+                            <p class="form-control-static" id="Code">JPN</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="control-label col-sm-2">Name</label>
+                        <div class="col-sm-4">
+                            <p class="form-control-static" id="name">Japan</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="continent" class="control-label col-sm-2">Continent</label>
+                        <div class="col-sm-4">
+                            <p class="form-control-static" id="continent">Asia</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="region" class="control-label col-sm-2">Region</label>
+                        <div class="col-sm-4">
+                            <p class="form-control-static" id="region">Eastern Asia</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="surfaceArea" class="control-label col-sm-2">SurfaceArea</label>
+                        <div class="col-sm-2">
+                            <p class="form-control-static" id="surfaceArea">377829.00</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="population" class="control-label col-sm-2">Population</label>
+                        <div class="col-sm-2">
+                            <p class="form-control-static" id="population">126714000</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="localName" class="control-label col-sm-2">LocalName</label>
+                        <div class="col-sm-6">
+                            <p class="form-control-static" id="localName">Nihon/Nippon</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="governmentForm" class="control-label col-sm-2">GovernmentForm</label>
+                        <div class="col-sm-6">
+                            <p class="form-control-static" id="governmentForm">Nihon/Constitutional Monarchy</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="code2" class="control-label col-sm-2">Code2</label>
+                        <div class="col-sm-1">
+                            <p class="form-control-static" id="code2">JP</p>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12">　</div>
+                    <div class="text-center">
+                        <button type="button" value="update" class="btn btn-primary">登録</button>
+                        <button type="button" value="back" class="btn btn-default">戻る</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/js/ie10-viewport-bug-workaround.js"></script>
+
+    <script type="text/javascript">
+    <!--
+    -->
+    </script>
+</body>
+</html>
