@@ -46,3 +46,7 @@ dependencies {
 bootRun {
     jvmArgs = ['-Dspring.profiles.active=develop']
 }
+
+test {
+    jvmArgs = ['-Dspring.profiles.active=develop']
+}
