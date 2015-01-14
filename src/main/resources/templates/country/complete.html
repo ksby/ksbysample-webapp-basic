@@ -1,0 +1,82 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>Countryデータ登録画面(完了)</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <style>
+    <!--
+    body {
+        padding-top: 50px;
+    }
+    .navbar-brand {
+        font-size: 24px;
+    }
+    .form-group {
+        margin-bottom: 5px;
+    }
+    -->
+    </style>
+</head>
+
+<body>
+    <div id="header" th:include="/common/header :: header (active='countryInput')"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-push-2 col-sm-10"><h1>Countryデータ登録</h1></div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">　</div>
+            <div class="col-xs-12">
+                <div class="col-sm-2">　</div>
+                <div class="col-sm-10" style="font-size: 120%;">登録が完了しました</div>
+            </div>
+
+            <div class="col-xs-12">　</div>
+            <div class="text-center">
+                <button type="button" id="js-input" value="input" class="btn btn-primary">次のデータを登録する</button>
+                <button type="button" id="js-toCountryList" value="toCountryList" class="btn btn-default">検索/一覧画面へ</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/js/ie10-viewport-bug-workaround.js"></script>
+
+    <script type="text/javascript">
+    <!--
+    $(document).ready(function() {
+        $('#js-input').bind('click', function(){
+            location.href = '/country/input';
+        });
+
+        $('#js-toCountryList').bind('click', function(){
+            location.href = '/countryList';
+        });
+    });
+    -->
+    </script>
+</body>
+</html>
