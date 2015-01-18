@@ -14,7 +14,7 @@ apply plugin: 'spring-boot'
 apply plugin: 'idea'
 
 jar {
-    baseName = 'ksbysample-simple'
+    baseName = 'ksbysample-webapp-basic'
     version =  '0.0.1-SNAPSHOT'
 }
 
