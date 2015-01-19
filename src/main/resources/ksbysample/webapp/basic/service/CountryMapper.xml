@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ksbysample.webapp.basic.service.CountryMapper">
+
+    <select id="selectCountry" parameterType="countryListForm" resultType="Country">
+        select co.Code
+        , co.Name
+        , co.Continent
+        , co.Region
+        , co.SurfaceArea
+        , co.IndepYear
+        , co.Population
+        , co.LifeExpectancy
+        , co.GNP
+        , co.GNPOld
+        , co.LocalName
+        , co.GovernmentForm
+        , co.HeadOfState
+        , co.Capital
+        , co.Code2
+        from country co
+        <where>
+            <if test="countryListForm.code != null and countryListForm.code != ''">
+                co.Code like '%${countryListForm.code}%'
+            </if>
+            <if test="countryListForm.name != null and countryListForm.name != ''">
+                and co.Name like '%${countryListForm.name}%'
+            </if>
+            <if test="countryListForm.continent != null and countryListForm.continent != ''">
+                and co.Continent like '%${countryListForm.continent}%'
+            </if>
+            <if test="countryListForm.localName != null and countryListForm.localName != ''">
+                and co.LocalName like '%${countryListForm.localName}%'
+            </if>
+        </where>
+        order by co.Code
+    </select>
+
+</mapper>

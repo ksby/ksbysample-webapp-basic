@@ -15,7 +15,7 @@ apply plugin: 'idea'
 
 jar {
     baseName = 'ksbysample-webapp-basic'
-    version =  '0.0.1-SNAPSHOT'
+    version = '0.0.1-SNAPSHOT'
 }
 
 idea {
