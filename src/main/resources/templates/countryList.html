@@ -54,7 +54,7 @@
                 <div class="panel-title">検索条件</div>
             </div>
             <div class="panel-body">
-                <form method="post" action="/countryList" th:action="@{/countryList}" th:object="${countryListForm}" class="form-horizontal">
+                <form id="searchForm" method="post" action="/countryList" th:action="@{/countryList}" th:object="${countryListForm}" class="form-horizontal">
                     <div class="form-group" th:classappend="${#fields.hasErrors('*{code}')} ? 'has-error' : ''">
                         <label for="code" class="control-label col-sm-2">Code</label>
                         <div class="col-sm-10">
@@ -85,39 +85,13 @@
                     </div>
                     <div class="text-center">
                         <button type="submit" value="検索" class="btn btn-primary">検索</button>
-                        <button type="reset" value="クリア" class="btn btn-default">クリア</button>
+                        <button type="reset" value="クリア" class="btn btn-default js-searchForm-clear">クリア</button>
                     </div>
                 </form>
             </div>
         </div>
 
-        <div class="text-center">
-            <ul class="pagination">
-                <li><a href="#">&#171;</a></li>
-            </ul>
-
-            <ul class="pagination">
-                <li class="active'">
-                    <a href="#">1</a>
-                </li>
-                <li>
-                    <a href="#">2</a>
-                </li>
-                <li>
-                    <a href="#">3</a>
-                </li>
-                <li>
-                    <a href="#">4</a>
-                </li>
-                <li>
-                    <a href="#">5</a>
-                </li>
-            </ul>
-
-            <ul class="pagination">
-                <li><a href="#">&#187;</a></li>
-            </ul>
-        </div>
+        <div id="pagenation" th:include="common/pagenation :: pagenation (url='/countryList', page=${page}, ph=${ph})"></div>
 
         <table class="table table-condensed table-bordered table-striped">
             <tr class="info">
@@ -126,7 +100,7 @@
                 <th>Continent</th>
                 <th>LocalName</th>
             </tr>
-            <tr th:each="country : ${countryList}">
+            <tr th:each="country : ${page.content}">
                 <td th:text="${country.code}">ABW</td>
                 <td th:text="${country.name}">Aruba</td>
                 <td th:text="${country.continent}">North America</td>
@@ -134,33 +108,14 @@
             </tr>
         </table>
 
-        <div class="text-center">
-            <ul class="pagination">
-                <li><a href="#">&#171;</a></li>
-            </ul>
+        <div id="pagenation" th:include="common/pagenation :: pagenation (url='/countryList', page=${page}, ph=${ph})"></div>
 
-            <ul class="pagination">
-                <li class="active'">
-                    <a href="#">1</a>
-                </li>
-                <li>
-                    <a href="#">2</a>
-                </li>
-                <li>
-                    <a href="#">3</a>
-                </li>
-                <li>
-                    <a href="#">4</a>
-                </li>
-                <li>
-                    <a href="#">5</a>
-                </li>
-            </ul>
-
-            <ul class="pagination">
-                <li><a href="#">&#187;</a></li>
-            </ul>
-        </div>
+        <form id="pagenationForm" method="post" action="#" th:object="${countryListForm}">
+            <input type="hidden" name="code" id="code" th:value="*{code}"/>
+            <input type="hidden" name="name" id="name" th:value="*{name}"/>
+            <input type="hidden" name="continent" id="continent" th:value="*{continent}"/>
+            <input type="hidden" name="localName" id="localName" th:value="*{localName}"/>
+        </form>
     </div>
 
     <!-- Bootstrap core JavaScript
@@ -175,6 +130,21 @@
     <!--
     $(document).ready(function() {
         $('#code').focus();
+
+        $('.js-searchForm-clear').click(function(){
+            $('#searchForm')
+                .find('input')
+                .val('');
+            $('#code').focus();
+        });
+
+        $('.js-pagenation').each(function(){
+            $(this).click(function(){
+                $('#pagenationForm').attr('action', $(this).attr('href'));
+                $(this).attr('href', '#');
+                $('#pagenationForm').submit();
+            });
+        });
     });
     -->
     </script>

@@ -10,6 +10,8 @@ import java.util.List;
 @Service
 public interface CountryMapper {
 
+    public long selectCountryCount(@Param("countryListForm") CountryListForm countryListForm);
+
     public List<Country> selectCountry(@Param("countryListForm") CountryListForm countryListForm);
 
 }
