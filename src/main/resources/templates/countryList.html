@@ -115,6 +115,7 @@
             <input type="hidden" name="name" id="name" th:value="*{name}"/>
             <input type="hidden" name="continent" id="continent" th:value="*{continent}"/>
             <input type="hidden" name="localName" id="localName" th:value="*{localName}"/>
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
         </form>
     </div>
 
