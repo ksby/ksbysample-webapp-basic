@@ -110,12 +110,11 @@
 
         <div id="pagenation" th:include="common/pagenation :: pagenation (url='/countryList', page=${page}, ph=${ph})"></div>
 
-        <form id="pagenationForm" method="post" action="#" th:object="${countryListForm}">
+        <form id="pagenationForm" method="post" action="#" th:action="@{#}" th:object="${countryListForm}">
             <input type="hidden" name="code" id="code" th:value="*{code}"/>
             <input type="hidden" name="name" id="name" th:value="*{name}"/>
             <input type="hidden" name="continent" id="continent" th:value="*{continent}"/>
             <input type="hidden" name="localName" id="localName" th:value="*{localName}"/>
-            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
         </form>
     </div>
 
