@@ -91,31 +91,33 @@
             </div>
         </div>
 
-        <div id="pagenation" th:include="common/pagenation :: pagenation (url='/countryList', page=${page}, ph=${ph})"></div>
+        <div th:if="${page} != null">
+            <div id="pagenation" th:include="common/pagenation :: pagenation (url='/countryList', page=${page}, ph=${ph})"></div>
 
-        <table class="table table-condensed table-bordered table-striped">
-            <tr class="info">
-                <th>Code</th>
-                <th>Name</th>
-                <th>Continent</th>
-                <th>LocalName</th>
-            </tr>
-            <tr th:each="country : ${page.content}">
-                <td th:text="${country.code}">ABW</td>
-                <td th:text="${country.name}">Aruba</td>
-                <td th:text="${country.continent}">North America</td>
-                <td th:text="${country.localName}">Aruba</td>
-            </tr>
-        </table>
+            <table class="table table-condensed table-bordered table-striped">
+                <tr class="info">
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Continent</th>
+                    <th>LocalName</th>
+                </tr>
+                <tr th:each="country : ${page.content}">
+                    <td th:text="${country.code}">ABW</td>
+                    <td th:text="${country.name}">Aruba</td>
+                    <td th:text="${country.continent}">North America</td>
+                    <td th:text="${country.localName}">Aruba</td>
+                </tr>
+            </table>
 
-        <div id="pagenation" th:include="common/pagenation :: pagenation (url='/countryList', page=${page}, ph=${ph})"></div>
+            <div id="pagenation" th:include="common/pagenation :: pagenation (url='/countryList', page=${page}, ph=${ph})"></div>
 
-        <form id="pagenationForm" method="post" action="#" th:action="@{#}" th:object="${countryListForm}">
-            <input type="hidden" name="code" id="code" th:value="*{code}"/>
-            <input type="hidden" name="name" id="name" th:value="*{name}"/>
-            <input type="hidden" name="continent" id="continent" th:value="*{continent}"/>
-            <input type="hidden" name="localName" id="localName" th:value="*{localName}"/>
-        </form>
+            <form id="pagenationForm" method="post" action="#" th:action="@{#}" th:object="${countryListForm}">
+                <input type="hidden" name="code" id="code" th:value="*{code}"/>
+                <input type="hidden" name="name" id="name" th:value="*{name}"/>
+                <input type="hidden" name="continent" id="continent" th:value="*{continent}"/>
+                <input type="hidden" name="localName" id="localName" th:value="*{localName}"/>
+            </form>
+        </div>
     </div>
 
     <!-- Bootstrap core JavaScript
