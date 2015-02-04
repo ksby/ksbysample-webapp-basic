@@ -20,8 +20,8 @@ public class CountryListForm {
     @Size(max = 45, message = "{error.size.max}")
     private String localName;
 
-    private long page;
+    private int page;
 
-    private long size;
+    private int size;
 
 }
