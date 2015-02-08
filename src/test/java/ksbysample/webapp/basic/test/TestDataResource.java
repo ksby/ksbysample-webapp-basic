@@ -33,6 +33,7 @@ public class TestDataResource extends ExternalResource {
             // バックアップを取得する
             QueryDataSet partialDataSet = new QueryDataSet(conn);
             partialDataSet.addTable("user");
+            partialDataSet.addTable("user_role");
             backupFile = File.createTempFile("world_backup", "xml");
             FlatXmlDataSet.write(partialDataSet, new FileOutputStream(backupFile));
 
