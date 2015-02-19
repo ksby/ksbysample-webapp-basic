@@ -32,6 +32,10 @@
     h1 {
         margin-bottom: 20px;
     }
+    .form-control-static {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
     -->
     </style>
 </head>
@@ -46,61 +50,71 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <form id="countryForm" method="post" action="/country/update" class="form-horizontal">
+                <form id="countryForm" method="post" action="/country/update" th:action="@{/country/update}" th:object="${countryForm}" class="form-horizontal">
                     <div class="form-group">
-                        <label for="Code" class="control-label col-sm-2">Code</label>
+                        <label for="code" class="control-label col-sm-2">Code</label>
                         <div class="col-sm-2">
-                            <p class="form-control-static" id="Code">JPN</p>
+                            <p class="form-control-static" th:text="*{code}">JPN</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="name" class="control-label col-sm-2">Name</label>
                         <div class="col-sm-4">
-                            <p class="form-control-static" id="name">Japan</p>
+                            <p class="form-control-static" th:text="*{name}">Japan</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="continent" class="control-label col-sm-2">Continent</label>
                         <div class="col-sm-4">
-                            <p class="form-control-static" id="continent">Asia</p>
+                            <p class="form-control-static" th:text="*{continent}">Asia</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="region" class="control-label col-sm-2">Region</label>
                         <div class="col-sm-4">
-                            <p class="form-control-static" id="region">Eastern Asia</p>
+                            <p class="form-control-static" th:text="*{region}">Eastern Asia</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="surfaceArea" class="control-label col-sm-2">SurfaceArea</label>
                         <div class="col-sm-2">
-                            <p class="form-control-static" id="surfaceArea">377829.00</p>
+                            <p class="form-control-static" th:text="*{surfaceArea}">377829.00</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="population" class="control-label col-sm-2">Population</label>
                         <div class="col-sm-2">
-                            <p class="form-control-static" id="population">126714000</p>
+                            <p class="form-control-static" th:text="*{population}">126714000</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="localName" class="control-label col-sm-2">LocalName</label>
                         <div class="col-sm-6">
-                            <p class="form-control-static" id="localName">Nihon/Nippon</p>
+                            <p class="form-control-static" th:text="*{localName}">Nihon/Nippon</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="governmentForm" class="control-label col-sm-2">GovernmentForm</label>
                         <div class="col-sm-6">
-                            <p class="form-control-static" id="governmentForm">Nihon/Constitutional Monarchy</p>
+                            <p class="form-control-static" th:text="*{governmentForm}">Nihon/Constitutional Monarchy</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="code2" class="control-label col-sm-2">Code2</label>
                         <div class="col-sm-1">
-                            <p class="form-control-static" id="code2">JP</p>
+                            <p class="form-control-static" th:text="*{code2}">JP</p>
                         </div>
                     </div>
+
+                    <input type="hidden" name="code" id="code" th:value="*{code}"/>
+                    <input type="hidden" name="name" id="name" th:value="*{name}"/>
+                    <input type="hidden" name="continent" id="continent" th:value="*{continent}"/>
+                    <input type="hidden" name="region" id="region" th:value="*{region}"/>
+                    <input type="hidden" name="surfaceArea" id="surfaceArea" th:value="*{surfaceArea}"/>
+                    <input type="hidden" name="population" id="population" th:value="*{population}"/>
+                    <input type="hidden" name="localName" id="localName" th:value="*{localName}"/>
+                    <input type="hidden" name="governmentForm" id="governmentForm" th:value="*{governmentForm}"/>
+                    <input type="hidden" name="code2" id="code2" th:value="*{code2}"/>
 
                     <div class="col-xs-12">　</div>
                     <div class="text-center">
@@ -128,7 +142,7 @@
         });
 
         $('#js-back').bind('click', function(){
-			$('#countryForm').attr('action', '/country/input');
+			$('#countryForm').attr('action', '/country/input/back');
             $('#countryForm').submit();
         });
     });

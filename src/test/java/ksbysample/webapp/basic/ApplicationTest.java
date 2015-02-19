@@ -1,11 +1,7 @@
 package ksbysample.webapp.basic;
 
 import org.junit.Rule;
-import org.junit.Test;
 import org.springframework.boot.test.OutputCapture;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 public class ApplicationTest {
 
