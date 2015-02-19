@@ -2,6 +2,7 @@ package ksbysample.webapp.basic.web;
 
 import ksbysample.webapp.basic.Application;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,7 @@ public class CountryControllerTest {
                 .andExpect(xpath("/html/head/title").string("Countryデータ登録画面(入力)"));
     }
 
+    @Ignore
     @Test
     public void testConfirm() throws Exception {
         this.mvc.perform(get("/country/confirm")).andExpect(status().isOk())
@@ -46,6 +48,7 @@ public class CountryControllerTest {
                 .andExpect(xpath("/html/head/title").string("Countryデータ登録画面(確認)"));
     }
 
+    @Ignore
     @Test
     public void testUpdate() throws Exception {
         this.mvc.perform(get("/country/update")).andExpect(status().isFound())

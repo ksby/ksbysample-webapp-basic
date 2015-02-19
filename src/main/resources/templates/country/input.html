@@ -32,6 +32,12 @@
     h1 {
         margin-bottom: 20px;
     }
+    .cst-form-inputform {
+        margin-bottom: 20px;
+    }
+    .has-error .form-control {
+        background-color: #fff5ee;
+    }
     -->
     </style>
 </head>
@@ -46,59 +52,76 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <form id="countryForm" method="post" action="/country/confirm" class="form-horizontal">
-                    <div class="form-group">
-                        <label for="Code" class="control-label col-sm-2">Code</label>
-                        <div class="col-sm-2">
-                            <input type="text" name="code" id="code" class="form-control input-sm" value="" placeholder="JPN"/>
+                <form id="countryForm" method="post" action="/country/confirm" th:action="@{/country/confirm}" th:object="${countryForm}" class="form-horizontal cst-form-inputform">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('*{code}')} ? 'has-error' : ''">
+                        <label for="code" class="control-label col-sm-2">Code</label>
+                        <div class="col-sm-10">
+                            <div class="row"><div class="col-sm-2"><input type="text" name="code" id="code" class="form-control input-sm" value="" placeholder="JPN" th:field="*{code}"/></div></div>
+                            <div class="row" th:if="${#fields.hasErrors('*{code}')}"><div class="col-sm-10"><p class="form-control-static text-danger"><small th:errors="*{code}"></small></p></div></div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('*{name}')} ? 'has-error' : ''">
                         <label for="name" class="control-label col-sm-2">Name</label>
-                        <div class="col-sm-4">
-                            <input type="text" name="name" id="name" class="form-control input-sm" value="" placeholder="Japan"/>
+                        <div class="col-sm-10">
+                            <div class="row"><div class="col-sm-4"><input type="text" name="name" id="name" class="form-control input-sm" value="" placeholder="Japan" th:field="*{name}"/></div></div>
+                            <div class="row" th:if="${#fields.hasErrors('*{name}')}"><div class="col-sm-10"><p class="form-control-static text-danger"><small th:errors="*{name}"></small></p></div></div>
                         </div>
                     </div>
-                    <div class="form-group">
+
+                    <div class="form-group" th:classappend="${#fields.hasErrors('*{continent}')} ? 'has-error' : ''">
                         <label for="continent" class="control-label col-sm-2">Continent</label>
-                        <div class="col-sm-4">
-                            <input type="text" name="continent" id="continent" class="form-control input-sm" value="" placeholder="Asia"/>
+                        <div class="col-sm-10">
+                            <div class="row"><div class="col-sm-4">
+                                <select name="continent" id="continent" class="form-control input-sm" th:field="*{continent}">
+                                    <option th:each="item : ${continentList}"
+                                            th:value="${item}"
+                                            th:text="${item}">continent</option>
+                                </select>
+                            </div></div>
+                            <div class="row" th:if="${#fields.hasErrors('*{continent}')}"><div class="col-sm-10"><p class="form-control-static text-danger"><small th:errors="*{continent}"></small></p></div></div>
                         </div>
                     </div>
-                    <div class="form-group">
+
+                    <div class="form-group" th:classappend="${#fields.hasErrors('*{region}')} ? 'has-error' : ''">
                         <label for="region" class="control-label col-sm-2">Region</label>
-                        <div class="col-sm-4">
-                            <input type="text" name="region" id="region" class="form-control input-sm" value="" placeholder="Eastern Asia"/>
+                        <div class="col-sm-10">
+                            <div class="row"><div class="col-sm-4"><input type="text" name="region" id="region" class="form-control input-sm" value="" placeholder="Eastern Asia" th:field="*{region}"/></div></div>
+                            <div class="row" th:if="${#fields.hasErrors('*{region}')}"><div class="col-sm-10"><p class="form-control-static text-danger"><small th:errors="*{region}"></small></p></div></div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('*{surfaceArea}')} ? 'has-error' : ''">
                         <label for="surfaceArea" class="control-label col-sm-2">SurfaceArea</label>
-                        <div class="col-sm-2">
-                            <input type="text" name="surfaceArea" id="surfaceArea" class="form-control input-sm" value="" placeholder="377829.00"/>
+                        <div class="col-sm-10">
+                            <div class="row"><div class="col-sm-2"><input type="text" name="surfaceArea" id="surfaceArea" class="form-control input-sm" value="" placeholder="377829.00" th:field="*{surfaceArea}"/></div></div>
+                            <div class="row" th:if="${#fields.hasErrors('*{surfaceArea}')}"><div class="col-sm-10"><p class="form-control-static text-danger"><small th:errors="*{surfaceArea}"></small></p></div></div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('*{population}')} ? 'has-error' : ''">
                         <label for="population" class="control-label col-sm-2">Population</label>
-                        <div class="col-sm-2">
-                            <input type="text" name="population" id="population" class="form-control input-sm" value="" placeholder="126714000"/>
+                        <div class="col-sm-10">
+                            <div class="row"><div class="col-sm-2"><input type="text" name="population" id="population" class="form-control input-sm" value="" placeholder="126714000" th:field="*{population}"/></div></div>
+                            <div class="row" th:if="${#fields.hasErrors('*{population}')}"><div class="col-sm-10"><p class="form-control-static text-danger"><small th:errors="*{population}"></small></p></div></div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('*{localName}')} ? 'has-error' : ''">
                         <label for="localName" class="control-label col-sm-2">LocalName</label>
-                        <div class="col-sm-6">
-                            <input type="text" name="localName" id="localName" class="form-control input-sm" value="" placeholder="Nihon/Nippon"/>
+                        <div class="col-sm-10">
+                            <div class="row"><div class="col-sm-6"><input type="text" name="localName" id="localName" class="form-control input-sm" value="" placeholder="Nihon/Nippon" th:field="*{localName}"/></div></div>
+                            <div class="row" th:if="${#fields.hasErrors('*{localName}')}"><div class="col-sm-10"><p class="form-control-static text-danger"><small th:errors="*{localName}"></small></p></div></div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('*{governmentForm}')} ? 'has-error' : ''">
                         <label for="governmentForm" class="control-label col-sm-2">GovernmentForm</label>
-                        <div class="col-sm-6">
-                            <input type="text" name="governmentForm" id="governmentForm" class="form-control input-sm" value="" placeholder="Constitutional Monarchy"/>
+                        <div class="col-sm-10">
+                            <div class="row"><div class="col-sm-6"><input type="text" name="governmentForm" id="governmentForm" class="form-control input-sm" value="" placeholder="Constitutional Monarchy" th:field="*{governmentForm}"/></div></div>
+                            <div class="row" th:if="${#fields.hasErrors('*{governmentForm}')}"><div class="col-sm-10"><p class="form-control-static text-danger"><small th:errors="*{governmentForm}"></small></p></div></div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('*{code2}')} ? 'has-error' : ''">
                         <label for="code2" class="control-label col-sm-2">Code2</label>
-                        <div class="col-sm-1">
-                            <input type="text" name="code2" id="code2" class="form-control input-sm" value="" placeholder="JP"/>
+                        <div class="col-sm-10">
+                            <div class="row"><div class="col-sm-2"><input type="text" name="code2" id="code2" class="form-control input-sm" value="" placeholder="JP" th:field="*{code2}"/></div></div>
+                            <div class="row" th:if="${#fields.hasErrors('*{code2}')}"><div class="col-sm-10"><p class="form-control-static text-danger"><small th:errors="*{code2}"></small></p></div></div>
                         </div>
                     </div>
 

@@ -1,24 +1,80 @@
 package ksbysample.webapp.basic.web;
 
+import ksbysample.webapp.basic.config.Constant;
+import ksbysample.webapp.basic.service.CountryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/country")
 public class CountryController {
 
+    @Autowired
+    private Constant constant;
+
+    @Autowired
+    private CountryFormValidator countryFormValidator;
+
+    @Autowired
+    private CountryService countryService;
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.addValidators(countryFormValidator);
+    }
+
     @RequestMapping("/input")
-    public String input() {
+    public String input(CountryForm countryForm
+            , Model model) {
+
+        model.addAttribute("continentList", constant.getCONTINENT_LIST());
         return "country/input";
     }
 
+    @RequestMapping("/input/back")
+    public String inputBack(CountryForm countryForm
+            , RedirectAttributes redirectAttributes) {
+
+        redirectAttributes.addFlashAttribute("countryForm", countryForm);
+        return "redirect:/country/input";
+    }
+
     @RequestMapping("/confirm")
-    public String confirm() {
+    public String confirm(@Validated CountryForm countryForm
+            , BindingResult bindingResult
+            , Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("continentList", constant.getCONTINENT_LIST());
+            return "country/input";
+        }
+
         return "country/confirm";
     }
 
     @RequestMapping("/update")
-    public String update() {
+    public String update(@Validated CountryForm countryForm
+            , BindingResult bindingResult
+            , Model model
+            , HttpServletResponse response) throws IOException {
+
+        if (bindingResult.hasErrors()) {
+            response.sendError(HttpStatus.BAD_REQUEST.value());
+            return null;
+        }
+
+        countryService.save(countryForm);
         return "redirect:/country/complete";
     }
 
