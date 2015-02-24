@@ -35,7 +35,7 @@ public class CountryListController {
         countryListForm.setSize(pageable.getPageSize());
         countryListForm.setPage(pageable.getPageNumber());
         Page<Country> page = countryService.findCountry(countryListForm, pageable);
-        PagenationHelper ph = new PagenationHelper(page.getNumber(), page.getSize(), page.getTotalPages());
+        PagenationHelper ph = new PagenationHelper(page);
 
         model.addAttribute("page", page);
         model.addAttribute("ph", ph);

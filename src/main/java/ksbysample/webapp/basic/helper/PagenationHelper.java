@@ -1,6 +1,7 @@
 package ksbysample.webapp.basic.helper;
 
 import lombok.Getter;
+import org.springframework.data.domain.Page;
 
 @Getter
 public class PagenationHelper {
@@ -23,7 +24,10 @@ public class PagenationHelper {
 
     private int page1PageValue;
 
-    public PagenationHelper(int number, int size, int totalPages) {
+    public PagenationHelper(Page<?> page) {
+        int number = page.getNumber();
+        int totalPages = page.getTotalPages();
+
         this.hiddenPrev = (number == 0);
         this.hiddenNext = ((totalPages == 0) || (number == totalPages - 1));
 
