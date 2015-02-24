@@ -38,7 +38,7 @@ public class CountryController {
     public String input(CountryForm countryForm
             , Model model) {
 
-        model.addAttribute("continentList", constant.getCONTINENT_LIST());
+        model.addAttribute("continentList", constant.CONTINENT_LIST);
         return "country/input";
     }
 
@@ -56,7 +56,7 @@ public class CountryController {
             , Model model) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("continentList", constant.getCONTINENT_LIST());
+            model.addAttribute("continentList", constant.CONTINENT_LIST);
             return "country/input";
         }
 
