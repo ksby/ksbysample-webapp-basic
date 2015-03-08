@@ -1,6 +1,8 @@
 package ksbysample.webapp.basic.web;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.Digits;
@@ -10,6 +12,8 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CountryForm {
 
     @NotBlank

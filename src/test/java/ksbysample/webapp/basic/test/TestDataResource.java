@@ -34,6 +34,7 @@ public class TestDataResource extends ExternalResource {
             QueryDataSet partialDataSet = new QueryDataSet(conn);
             partialDataSet.addTable("user");
             partialDataSet.addTable("user_role");
+            partialDataSet.addTable("country");
             backupFile = File.createTempFile("world_backup", "xml");
             FlatXmlDataSet.write(partialDataSet, new FileOutputStream(backupFile));
 
