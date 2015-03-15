@@ -27,6 +27,9 @@ idea {
 
 repositories {
     jcenter()
+    maven {
+        url "http://oss.sonatype.org/content/groups/public/"
+    }
 }
 
 dependencies {
@@ -46,6 +49,7 @@ dependencies {
     testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
     testCompile("org.springframework.security:spring-security-test:4.0.0.RC2")
     testCompile("org.dbunit:dbunit:2.5.0")
+    testCompile("org.yaml:snakeyaml:1.16-SNAPSHOT")
 }
 
 bootRun {

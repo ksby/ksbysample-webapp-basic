@@ -4,6 +4,7 @@ import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.database.QueryDataSet;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.ReplacementDataSet;
 import org.dbunit.dataset.csv.CsvDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.file.Files;
 
 @Component
 public class TestDataResource extends ExternalResource {
@@ -25,7 +27,7 @@ public class TestDataResource extends ExternalResource {
     private File backupFile;
 
     @Override
-    protected void before() throws Throwable {
+    protected void before() throws Exception {
         IDatabaseConnection conn = null;
         try {
             conn = new DatabaseConnection(dataSource.getConnection());
@@ -35,12 +37,18 @@ public class TestDataResource extends ExternalResource {
             partialDataSet.addTable("user");
             partialDataSet.addTable("user_role");
             partialDataSet.addTable("country");
+            ReplacementDataSet replacementDatasetBackup = new ReplacementDataSet(partialDataSet);
+            replacementDatasetBackup.addReplacementObject("", "[null]");
             backupFile = File.createTempFile("world_backup", "xml");
-            FlatXmlDataSet.write(partialDataSet, new FileOutputStream(backupFile));
+            try (FileOutputStream fos = new FileOutputStream(backupFile)) {
+                FlatXmlDataSet.write(replacementDatasetBackup, fos);
+            }
 
             // テストデータに入れ替える
-            IDataSet dataset = new CsvDataSet(new File("src/test/resources/testdata"));
-            DatabaseOperation.CLEAN_INSERT.execute(conn, dataset);
+            IDataSet dataSet = new CsvDataSet(new File("src/test/resources/testdata"));
+            ReplacementDataSet replacementDataset = new ReplacementDataSet(dataSet);
+            replacementDataset.addReplacementObject("[null]", null);
+            DatabaseOperation.CLEAN_INSERT.execute(conn, replacementDataset);
         }
         finally {
             if (conn != null) conn.close();
@@ -57,16 +65,21 @@ public class TestDataResource extends ExternalResource {
                 // バックアップからリストアする
                 if (backupFile != null) {
                     IDataSet dataSet = new FlatXmlDataSetBuilder().build(backupFile);
-                    DatabaseOperation.CLEAN_INSERT.execute(conn, dataSet);
-                    backupFile.delete();
+                    ReplacementDataSet replacementDatasetRestore = new ReplacementDataSet(dataSet);
+                    replacementDatasetRestore.addReplacementObject("[null]", null);
+                    DatabaseOperation.CLEAN_INSERT.execute(conn, replacementDatasetRestore);
+                }
+            } finally {
+                if (backupFile != null) {
+                    Files.delete(backupFile.toPath());
                     backupFile = null;
                 }
+                try {
+                    if (conn != null) conn.close();
+                } catch (Exception ignored) {}
             }
-            finally {
-                if (conn != null) conn.close();
-            }
-        }
-        catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
