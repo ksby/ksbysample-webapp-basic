@@ -7,6 +7,11 @@
             <include resource="logback-develop.xml"/>
         </then>
     </if>
+    <if condition='"${spring.profiles.active}" == "unittest"'>
+        <then>
+            <include resource="logback-unittest.xml"/>
+        </then>
+    </if>
     <if condition='"${spring.profiles.active}" == "product"'>
         <then>
             <include resource="logback-product.xml"/>

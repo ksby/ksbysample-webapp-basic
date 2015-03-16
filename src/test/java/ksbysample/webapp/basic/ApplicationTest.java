@@ -8,9 +8,9 @@ import org.springframework.boot.test.OutputCapture;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-@Ignore
 public class ApplicationTest {
 
+/*
     @Rule
     public OutputCapture outputCapture = new OutputCapture();
 
@@ -49,5 +49,6 @@ public class ApplicationTest {
         assertThat(output.contains("JVMの起動時引数 -Dspring.profiles.active で develop か product を指定して下さい"), is(true));
         System.setProperty("spring.profiles.active", SPRING_PROFILES_ACTIVE);
     }
+*/
 
 }

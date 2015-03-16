@@ -57,5 +57,5 @@ bootRun {
 }
 
 test {
-    jvmArgs = ['-Dspring.profiles.active=develop']
+    jvmArgs = ['-Dspring.profiles.active=unittest']
 }
