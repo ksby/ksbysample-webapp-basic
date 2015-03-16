@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <logger name="root" level="OFF"/>
+
+    <!-- Spring MVC -->
+    <logger name="org.springframework.web" level="OFF"/>
+
+    <!-- log4jdbc-log4j2 -->
+    <logger name="jdbc.sqlonly"        level="OFF"/>
+    <logger name="jdbc.sqltiming"      level="OFF"/>
+    <logger name="jdbc.audit"          level="OFF"/>
+    <logger name="jdbc.resultset"      level="OFF"/>
+    <logger name="jdbc.resultsettable" level="OFF"/>
+    <logger name="jdbc.connection"     level="OFF"/>
+</included>
