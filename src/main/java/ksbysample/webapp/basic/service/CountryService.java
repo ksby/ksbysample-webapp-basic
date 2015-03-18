@@ -9,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
@@ -34,7 +33,6 @@ public class CountryService {
         return new PageImpl<Country>(countryList, pageable, count);
     }
 
-    @Transactional
     public void save(CountryForm countryForm) {
         Country country = new Country();
         BeanUtils.copyProperties(countryForm, country);
