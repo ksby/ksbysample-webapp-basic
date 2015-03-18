@@ -3,9 +3,11 @@ package ksbysample.webapp.basic;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ImportResource;
 
 import java.text.MessageFormat;
 
+@ImportResource("classpath:applicationContext.xml")
 @SpringBootApplication
 public class Application {
 
