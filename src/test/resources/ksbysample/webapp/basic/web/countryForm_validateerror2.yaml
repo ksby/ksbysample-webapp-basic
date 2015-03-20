@@ -1,0 +1,10 @@
+!!ksbysample.webapp.basic.web.CountryForm
+code: JP2
+name: Japan
+continent: Asia
+region: Southern Europe
+surfaceArea: 1
+population: 2
+localName: Nippon
+governmentForm: test
+code2: JP
