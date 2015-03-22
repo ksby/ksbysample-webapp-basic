@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>検索/一覧画面</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <style>
+    <!--
+    body {
+        padding-top: 70px;
+    }
+    .navbar-brand {
+        font-size: 24px;
+    }
+    .panel-heading {
+        padding: 5px 10px;
+    }
+    .form-group {
+        margin-bottom: 5px;
+    }
+    .pagination {
+        margin: 10px 0;
+    }
+    .panel {
+        margin-bottom: 10px;
+    }
+    .table {
+        margin-bottom: 10px;
+    }
+    -->
+    </style>
+</head>
+
+<body>
+    <div id="header" th:include="common/header :: header (active='countryListJpa')"></div>
+
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">検索条件</div>
+            </div>
+            <div class="panel-body">
+                <form id="searchForm" method="post" action="/countryListJpa" th:action="@{/countryListJpa}" th:object="${countryListForm}" class="form-horizontal">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('*{code}')} ? 'has-error' : ''">
+                        <label for="code" class="control-label col-sm-2">Code</label>
+                        <div class="col-sm-10">
+                            <div class="row"><div class="col-sm-2"><input type="text" name="code" id="code" maxlength="3" class="form-control input-sm" th:field="*{code}"/></div></div>
+                            <div class="row" th:if="${#fields.hasErrors('*{code}')}"><div class="col-sm-10"><p class="form-control-static text-danger"><small th:errors="*{code}"></small></p></div></div>
+                        </div>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('*{name}')} ? 'has-error' : ''">
+                        <label for="name" class="control-label col-sm-2">Name</label>
+                        <div class="col-sm-10">
+                            <div class="row"><div class="col-sm-6"><input type="text" name="name" id="name" maxlength="52" class="form-control input-sm" th:field="*{name}"/></div></div>
+                            <div class="row" th:if="${#fields.hasErrors('*{name}')}"><div class="col-sm-10"><p class="form-control-static text-danger"><small th:errors="*{name}"></small></p></div></div>
+                        </div>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('*{continent}')} ? 'has-error' : ''">
+                        <label for="continent" class="control-label col-sm-2">Continent</label>
+                        <div class="col-sm-10">
+                            <div class="row"><div class="col-sm-3"><input type="text" name="continent" id="continent" class="form-control input-sm" th:field="*{continent}"/></div></div>
+                            <div class="row" th:if="${#fields.hasErrors('*{continent}')}"><div class="col-sm-10"><p class="form-control-static text-danger"><small th:errors="*{continent}"></small></p></div></div>
+                        </div>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('*{localName}')} ? 'has-error' : ''">
+                        <label for="localName" class="control-label col-sm-2">LocalName</label>
+                        <div class="col-sm-10">
+                            <div class="row"><div class="col-sm-5"><input type="text" name="localName" id="localName" maxlength="45" class="form-control input-sm" th:field="*{localName}"/></div></div>
+                            <div class="row" th:if="${#fields.hasErrors('*{localName}')}"><div class="col-sm-10"><p class="form-control-static text-danger"><small th:errors="*{localName}"></small></p></div></div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" value="検索" class="btn btn-primary">検索</button>
+                        <button type="reset" value="クリア" class="btn btn-default js-searchForm-clear">クリア</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div th:if="${page} != null">
+            <div id="pagenation" th:include="common/pagenation :: pagenation (url='/countryListJpa', page=${page}, ph=${ph})"></div>
+
+            <table class="table table-condensed table-bordered table-striped">
+                <tr class="info">
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Continent</th>
+                    <th>LocalName</th>
+                </tr>
+                <tr th:each="country : ${page.content}">
+                    <td th:text="${country.code}">ABW</td>
+                    <td th:text="${country.name}">Aruba</td>
+                    <td th:text="${country.continent}">North America</td>
+                    <td th:text="${country.localName}">Aruba</td>
+                </tr>
+            </table>
+
+            <div id="pagenation" th:include="common/pagenation :: pagenation (url='/countryListJpa', page=${page}, ph=${ph})"></div>
+
+            <form id="pagenationForm" method="post" action="#" th:action="@{#}" th:object="${countryListForm}">
+                <input type="hidden" name="code" id="code" th:value="*{code}"/>
+                <input type="hidden" name="name" id="name" th:value="*{name}"/>
+                <input type="hidden" name="continent" id="continent" th:value="*{continent}"/>
+                <input type="hidden" name="localName" id="localName" th:value="*{localName}"/>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/js/ie10-viewport-bug-workaround.js"></script>
+
+    <script type="text/javascript">
+    <!--
+    $(document).ready(function() {
+        $('#code').focus();
+
+        $('.js-searchForm-clear').click(function(){
+            $('#searchForm')
+                .find('input')
+                .val('');
+            $('#code').focus();
+        });
+
+        $('.js-pagenation').each(function(){
+            $(this).click(function(){
+                $('#pagenationForm').attr('action', $(this).attr('href'));
+                $(this).attr('href', '#');
+                $('#pagenationForm').submit();
+            });
+        });
+    });
+    -->
+    </script>
+</body>
+</html>
