@@ -51,6 +51,7 @@
                     <ul class="nav navbar-nav  navbar-left">
                         <li th:class="${active == 'countryList'} ? 'active'"><a href="/countryList"><span class="glyphicon glyphicon-search"></span>　検索/一覧</a></li>
                         <li th:class="${active == 'countryInput'} ? 'active'"><a href="/country/input"><span class="glyphicon glyphicon-pencil"></span>　登録</a></li>
+                        <li th:class="${active == 'countryListJpa'} ? 'active'"><a href="/countryListJpa"><span class="glyphicon glyphicon-search"></span>　検索/一覧(JPA)</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>　ログアウト</a></li>
