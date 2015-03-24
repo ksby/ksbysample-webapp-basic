@@ -13,7 +13,7 @@ public class CountrySpecifications {
 
     public static Specification<Country> nameContains(String name) {
         return StringUtils.isEmpty(name) ? null : (root, query, cb) ->
-            cb.like(root.get("name"), "%" + name + "%");
+                cb.like(root.get("name"), "%" + name + "%");
     }
 
     public static Specification<Country> continentContains(String continent) {

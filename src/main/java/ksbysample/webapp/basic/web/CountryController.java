@@ -1,7 +1,9 @@
 package ksbysample.webapp.basic.web;
 
 import ksbysample.webapp.basic.config.Constant;
+import ksbysample.webapp.basic.domain.Country;
 import ksbysample.webapp.basic.exception.InvalidRequestException;
+import ksbysample.webapp.basic.service.CountryRepository;
 import ksbysample.webapp.basic.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -30,6 +32,9 @@ public class CountryController {
 
     @Autowired
     private CountryService countryService;
+
+    @Autowired
+    private CountryRepository countryRepository;
 
     @Autowired
     private MessageSource messageSource;
@@ -61,6 +66,14 @@ public class CountryController {
             , Model model) {
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("continentList", constant.CONTINENT_LIST);
+            return "country/input";
+        }
+
+        // code に入力された文字列をキーに持つデータが登録されている場合にはエラーにする
+        Country country = countryRepository.findOne(countryForm.getCode());
+        if (country != null) {
+            bindingResult.reject("countryForm.global.duplicate");
             model.addAttribute("continentList", constant.CONTINENT_LIST);
             return "country/input";
         }
