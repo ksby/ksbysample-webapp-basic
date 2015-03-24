@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.yaml.snakeyaml.Yaml;
 
 import static ksbysample.webapp.basic.test.CustomFlashAttributeResultMatchers.flashEx;
-import static ksbysample.webapp.basic.test.FieldErrorsMatchers.fieldErrors;
+import static ksbysample.webapp.basic.test.ErrorsResultMatchers.errors;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -126,6 +126,8 @@ public class CountryControllerTest {
                         = (CountryForm) new Yaml().load(getClass().getResourceAsStream("countryForm_validateerror1.yaml"));
                 private CountryForm countryFormValidateError2
                         = (CountryForm) new Yaml().load(getClass().getResourceAsStream("countryForm_validateerror2.yaml"));
+                private CountryForm countryFormDuplicate
+                        = (CountryForm) new Yaml().load(getClass().getResourceAsStream("countryForm_duplicate.yaml"));
 
                 @Test
                 public void 入力画面を表示する() throws Exception {
@@ -148,17 +150,17 @@ public class CountryControllerTest {
                             .andExpect(xpath("/html/head/title").string("Countryデータ登録画面(入力)"))
                             .andExpect(model().hasErrors())
                             .andExpect(model().errorCount(11))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "code", "NotBlank"))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "name", "NotBlank"))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "continent", "NotBlank"))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "continent", "Pattern"))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "region", "NotBlank"))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "surfaceArea", "NotNull"))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "population", "NotNull"))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "localName", "NotBlank"))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "governmentForm", "NotBlank"))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "code2", "NotBlank"))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "code2", "countryForm.code2.equalCode"))
+                            .andExpect(errors().hasFieldError("countryForm", "code", "NotBlank"))
+                            .andExpect(errors().hasFieldError("countryForm", "name", "NotBlank"))
+                            .andExpect(errors().hasFieldError("countryForm", "continent", "NotBlank"))
+                            .andExpect(errors().hasFieldError("countryForm", "continent", "Pattern"))
+                            .andExpect(errors().hasFieldError("countryForm", "region", "NotBlank"))
+                            .andExpect(errors().hasFieldError("countryForm", "surfaceArea", "NotNull"))
+                            .andExpect(errors().hasFieldError("countryForm", "population", "NotNull"))
+                            .andExpect(errors().hasFieldError("countryForm", "localName", "NotBlank"))
+                            .andExpect(errors().hasFieldError("countryForm", "governmentForm", "NotBlank"))
+                            .andExpect(errors().hasFieldError("countryForm", "code2", "NotBlank"))
+                            .andExpect(errors().hasFieldError("countryForm", "code2", "countryForm.code2.equalCode"))
                             .andReturn();
 //                    // 発生しているfield errorを全て出力するには以下のようにする
 //                    ModelAndView mav = result.getModelAndView();
@@ -178,15 +180,15 @@ public class CountryControllerTest {
                             .andExpect(status().isOk())
                             .andExpect(model().hasErrors())
                             .andExpect(model().errorCount(9))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "code", "Size"))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "name", "Size"))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "continent", "Pattern"))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "region", "Size"))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "surfaceArea", "Digits"))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "population", "Digits"))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "localName", "Size"))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "governmentForm", "Size"))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "code2", "Size"))
+                            .andExpect(errors().hasFieldError("countryForm", "code", "Size"))
+                            .andExpect(errors().hasFieldError("countryForm", "name", "Size"))
+                            .andExpect(errors().hasFieldError("countryForm", "continent", "Pattern"))
+                            .andExpect(errors().hasFieldError("countryForm", "region", "Size"))
+                            .andExpect(errors().hasFieldError("countryForm", "surfaceArea", "Digits"))
+                            .andExpect(errors().hasFieldError("countryForm", "population", "Digits"))
+                            .andExpect(errors().hasFieldError("countryForm", "localName", "Size"))
+                            .andExpect(errors().hasFieldError("countryForm", "governmentForm", "Size"))
+                            .andExpect(errors().hasFieldError("countryForm", "code2", "Size"))
                             .andExpect(content().contentType("text/html;charset=UTF-8"))
                             .andExpect(view().name("country/input"))
                             .andExpect(xpath("/html/head/title").string("Countryデータ登録画面(入力)"));
@@ -201,7 +203,7 @@ public class CountryControllerTest {
                             .andExpect(status().isOk())
                             .andExpect(model().hasErrors())
                             .andExpect(model().errorCount(1))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "continent", "countryForm.continent.notAsia"))
+                            .andExpect(errors().hasFieldError("countryForm", "continent", "countryForm.continent.notAsia"))
                             .andExpect(content().contentType("text/html;charset=UTF-8"))
                             .andExpect(view().name("country/input"))
                             .andExpect(xpath("/html/head/title").string("Countryデータ登録画面(入力)"));
@@ -216,7 +218,22 @@ public class CountryControllerTest {
                             .andExpect(status().isOk())
                             .andExpect(model().hasErrors())
                             .andExpect(model().errorCount(1))
-                            .andExpect(fieldErrors().hasFieldError("countryForm", "region", "countryForm.region.notAsiaPattern"))
+                            .andExpect(errors().hasFieldError("countryForm", "region", "countryForm.region.notAsiaPattern"))
+                            .andExpect(content().contentType("text/html;charset=UTF-8"))
+                            .andExpect(view().name("country/input"))
+                            .andExpect(xpath("/html/head/title").string("Countryデータ登録画面(入力)"));
+                }
+
+                @Test
+                public void countryForm_global_duplicateの入力チェックエラーのテスト() throws Exception {
+                    // countryForm.global.duplicate の入力チェックのテスト
+                    secmvc.auth.perform(TestHelper.postForm("/country/confirm", this.countryFormDuplicate)
+                                    .with(csrf())
+                    )
+                            .andExpect(status().isOk())
+                            .andExpect(model().hasErrors())
+                            .andExpect(model().errorCount(1))
+                            .andExpect(errors().hasGlobalError("countryForm", "countryForm.global.duplicate"))
                             .andExpect(content().contentType("text/html;charset=UTF-8"))
                             .andExpect(view().name("country/input"))
                             .andExpect(xpath("/html/head/title").string("Countryデータ登録画面(入力)"));
