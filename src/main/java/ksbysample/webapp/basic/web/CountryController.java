@@ -1,6 +1,5 @@
 package ksbysample.webapp.basic.web;
 
-import ksbysample.webapp.basic.config.Constant;
 import ksbysample.webapp.basic.domain.Country;
 import ksbysample.webapp.basic.exception.InvalidRequestException;
 import ksbysample.webapp.basic.service.CountryRepository;
@@ -25,9 +24,6 @@ import java.util.Locale;
 public class CountryController {
 
     @Autowired
-    private Constant constant;
-
-    @Autowired
     private CountryFormValidator countryFormValidator;
 
     @Autowired
@@ -48,7 +44,6 @@ public class CountryController {
     public String input(CountryForm countryForm
             , Model model) {
 
-        model.addAttribute("continentList", constant.CONTINENT_LIST);
         return "country/input";
     }
 
@@ -66,7 +61,6 @@ public class CountryController {
             , Model model) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("continentList", constant.CONTINENT_LIST);
             return "country/input";
         }
 
@@ -74,7 +68,6 @@ public class CountryController {
         Country country = countryRepository.findOne(countryForm.getCode());
         if (country != null) {
             bindingResult.reject("countryForm.global.duplicate");
-            model.addAttribute("continentList", constant.CONTINENT_LIST);
             return "country/input";
         }
 
