@@ -12,10 +12,10 @@ import java.util.List;
 @PropertySource("classpath:constant.properties")
 public class Constant {
 
-    public final List<String> CONTINENT_LIST;
+    public static List<String> CONTINENT_LIST;
 
     @Autowired
-    public Constant(
+    private Constant(
             @Value("#{'${CONTINENT_LIST}'.split(',')}") List<String> CONTINENT_LIST
     ) {
         this.CONTINENT_LIST = CONTINENT_LIST;
